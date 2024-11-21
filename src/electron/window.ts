@@ -17,7 +17,7 @@ import {
   store, WINDOW_STATE_FILE,
 } from './utils';
 
-const ALLOWED_DEVICE_ORIGINS = ['http://localhost:4321', 'file://', BASE_URL];
+const ALLOWED_DEVICE_ORIGINS = ['http://localhost:4321', 'https://dpswallet.netlify.app/','file://', BASE_URL];
 
 export function createWindow() {
   const windowState = windowStateKeeper({

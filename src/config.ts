@@ -93,7 +93,7 @@ export const TONHTTPAPI_V3_TESTNET_API_URL = process.env.TONHTTPAPI_V3_TESTNET_A
   || 'https://tonhttpapi-v3-testnet.mytonwallet.org/api/v3';
 export const TONAPIIO_TESTNET_URL = process.env.TONAPIIO_TESTNET_URL || 'https://tonapiio-testnet.mytonwallet.org';
 
-export const BRILLIANT_API_BASE_URL = process.env.BRILLIANT_API_BASE_URL || 'https://api.mytonwallet.org';
+export const BRILLIANT_API_BASE_URL = 'https://api.mytonwallet.org';
 
 export const FRACTION_DIGITS = 9;
 export const SHORT_FRACTION_DIGITS = 2;

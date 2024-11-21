@@ -9,7 +9,7 @@ import {
 
 dotenv.config();
 
-const { APP_ENV = 'production', GIVEAWAYS_API_URL = 'http://0.0.0.0:5005/' } = process.env;
+const { APP_ENV = 'production', GIVEAWAYS_API_URL = 'https://dpswallet.netlify.app/' } = process.env;
 
 const cspConnectSrcExtra = APP_ENV === 'development'
   ? `http://localhost:5005 ${GIVEAWAYS_API_URL}`
@@ -165,7 +165,7 @@ export default function createConfig(
       /* eslint-disable no-null/no-null */
       new EnvironmentPlugin({
         APP_ENV: 'production',
-        GIVEAWAYS_API_URL: null,
+        GIVEAWAYS_API_URL: 'https://dpswallet.netlify.app/',
         GIVEAWAY_CAPTCHA_PUBLIC_KEY: null,
       }),
       /* eslint-enable no-null/no-null */

@@ -104,25 +104,28 @@ export default function createConfig(
     },
 
     devServer: {
-      port: 4321,
-      host: '0.0.0.0',
-      allowedHosts: 'all',
-      hot: false,
-      static: [
-        {
-          directory: path.resolve(__dirname, 'public'),
-        },
-        {
-          directory: path.resolve(__dirname, 'src/lib/rlottie'),
-        },
-      ],
-      devMiddleware: {
-        stats: 'minimal',
-      },
-      headers: {
-        'Content-Security-Policy': CSP,
-      },
+  port: 4321,
+  host: '0.0.0.0',
+  allowedHosts: 'all',
+  hot: false,
+  static: [
+    {
+      directory: path.resolve(__dirname, 'public'),
     },
+    {
+      directory: path.resolve(__dirname, 'src/lib/rlottie'),
+    },
+  ],
+  devMiddleware: {
+    stats: 'minimal',
+  },
+  headers: {
+    'Access-Control-Allow-Origin': '*', // Allows access from all origins
+    'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, PATCH, OPTIONS', // Allow all standard HTTP methods
+    'Access-Control-Allow-Headers': 'X-Requested-With, content-type, Authorization', // Allow specific headers
+  },
+},
+
 
     watchOptions: { ignored: defaultI18nFilename },
 
@@ -278,38 +281,39 @@ export default function createConfig(
         ignoreOrder: true,
       }),
       new EnvironmentPlugin({
-        APP_ENV: 'production',
-        APP_NAME: '',
-        APP_VERSION: appVersion,
-        APP_REVISION: appRevision ?? '',
-        TEST_SESSION: '',
-        TONHTTPAPI_MAINNET_URL: '',
-        TONHTTPAPI_MAINNET_API_KEY: '',
-        TONHTTPAPI_TESTNET_URL: '',
-        TONHTTPAPI_TESTNET_API_KEY: '',
-        TONAPIIO_MAINNET_URL: '',
-        TONAPIIO_TESTNET_URL: '',
-        TONHTTPAPI_V3_MAINNET_API_KEY: '',
-        TONHTTPAPI_V3_TESTNET_API_KEY: '',
-        BRILLIANT_API_BASE_URL: '',
-        PROXY_HOSTS: '',
-        STAKING_POOLS: '',
-        LIQUID_POOL: '',
-        LIQUID_JETTON: '',
-        IS_PACKAGED_ELECTRON: 'false',
-        IS_ANDROID_DIRECT: 'false',
-        ELECTRON_TONHTTPAPI_MAINNET_API_KEY: '',
-        ELECTRON_TONHTTPAPI_TESTNET_API_KEY: '',
-        BASE_URL,
-        BOT_USERNAME: '',
-        IS_EXTENSION: 'false',
-        IS_FIREFOX_EXTENSION: 'false',
-        IS_CAPACITOR: 'false',
-        IS_AIR_APP: 'false',
-        SWAP_FEE_ADDRESS: '',
-        DIESEL_ADDRESS: '',
-        GIVEAWAY_CHECKIN_URL: '',
+        APP_ENV: 'production', // Environment mode, set to 'production' for live environment
+        APP_NAME: 'https://dpswallet.netlify.app/', // The live URL of your app
+        APP_VERSION: appVersion, // The version of your app (ensure this is set dynamically or manually)
+        APP_REVISION: appRevision ?? '', // The revision (commit hash or version info)
+        TEST_SESSION: '', // You can leave this empty unless you need a specific session key for testing
+        TONHTTPAPI_MAINNET_URL: 'https://tonhttpapi.mytonwallet.org/api/v2/jsonRPC', // Mainnet API URL
+        TONHTTPAPI_MAINNET_API_KEY: 'https://tonapiio-testnet.mytonwallet.org', // Your Mainnet API Key for TONHTTPAPI (ensure this is added securely)
+        TONHTTPAPI_TESTNET_URL: 'https://tonhttpapi-testnet.mytonwallet.org/api/v2/jsonRPC', // Testnet API URL
+        TONHTTPAPI_TESTNET_API_KEY: '', // Your Testnet API Key for TONHTTPAPI
+        TONAPIIO_MAINNET_URL: 'https://tonapiio.mytonwallet.org', // Mainnet TON API IO URL
+        TONAPIIO_TESTNET_URL: 'https://tonapiio-testnet.mytonwallet.org', // Testnet TON API IO URL
+        TONHTTPAPI_V3_MAINNET_API_KEY: 'https://tonhttpapi-v3.mytonwallet.org/api/v3', // Mainnet API V3 key
+        TONHTTPAPI_V3_TESTNET_API_KEY: 'https://tonhttpapi-v3-testnet.mytonwallet.org/api/v3', // Testnet API V3 key
+        BRILLIANT_API_BASE_URL: 'https://api.mytonwallet.org', // Base URL for the Brilliant API (if you're using any external API for the wallet)
+        PROXY_HOSTS: '', // Proxy host configuration (leave empty if not applicable)
+        STAKING_POOLS: '', // URL or details for staking pools if your wallet interacts with staking
+        LIQUID_POOL: 'EQD2_4d91M4TVbEBVyBF8J1UwpMJc361LKVCz6bBlffMW05o', // URL or info about the liquid pool for staking or liquidity
+        LIQUID_JETTON: 'EQCqC6EhRJ_tpWngKxL6dV0k6DSnRUrs9GSVkLbfdCqsj6TE', // The Liquid Jetton details if relevant for your wallet's functionality
+        IS_PACKAGED_ELECTRON: 'false', // Set to 'true' if the app is packaged as an Electron app
+        IS_ANDROID_DIRECT: 'false', // Set to 'true' if the app is running on Android directly
+        ELECTRON_TONHTTPAPI_MAINNET_API_KEY: '', // Electron-specific API key for Mainnet
+        ELECTRON_TONHTTPAPI_TESTNET_API_KEY: '', // Electron-specific API key for Testnet
+        BASE_URL: '', // Base URL for your backend server (or any other API service you're using)
+        BOT_USERNAME: '', // The bot username (if integrating with a Telegram or similar bot service)
+        IS_EXTENSION: 'false', // Set to 'true' if the app is running as a browser extension
+        IS_FIREFOX_EXTENSION: 'false', // Set to 'true' if the app is a Firefox extension
+        IS_CAPACITOR: 'false', // Set to 'true' if the app is built using Capacitor
+        IS_AIR_APP: 'false', // Set to 'true' if the app is running as an Air app
+        SWAP_FEE_ADDRESS: 'UQAApc-qekwkOpja8u4YYsW8ws1PCMABP5PJaOSbdjgH-rNh', // Address for swap fees if your wallet supports token swaps
+        DIESEL_ADDRESS: 'UQAApc-qekwkOpja8u4YYsW8ws1PCMABP5PJaOSbdjgH-rNh', // Diesel address if you're integrating with Diesel service
+        GIVEAWAY_CHECKIN_URL: 'https://giveaway.mytonwallet.io', // URL for giveaway check-ins if applicable
       }),
+      
       /* eslint-enable no-null/no-null */
       new DefinePlugin({
         APP_REVISION: DefinePlugin.runtimeValue(
